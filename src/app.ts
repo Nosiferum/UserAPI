@@ -1,7 +1,7 @@
 import express, {Request, Response} from 'express';
 import logger from 'morgan';
 import indexRouter from './routes/index';
-import userRouter from './routes/user';
+import userRouter from './routes/users';
 import cookieParser from 'cookie-parser';
 
 const app = express();
