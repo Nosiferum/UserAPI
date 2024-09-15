@@ -6,7 +6,7 @@ const connectToMongoDB = async (): Promise<void> => {
     let retries = 0;
 
     try {
-        const connection = await mongoose.connect(process.env.MONGO_URI || "mongodb://127.0.0.1:27017/userAPI");
+        const connection = await mongoose.connect(process.env.MONGO_URI || "mongodb://127.0.0.1:27018/userAPI");
 
         console.log(`MongoDB Connected: ${connection.connection.host}:${connection.connection.port}`);
     } catch (error) {
