@@ -1,5 +1,6 @@
 import {Request, Response, NextFunction} from "express";
 import {Error} from "mongoose";
+import {JsonWebTokenError} from "jsonwebtoken";
 
 type AsyncAppFunction = (req: Request, res: Response, next: NextFunction) => Promise<void>;
 
@@ -12,6 +13,10 @@ function wrapAsync(fn: AsyncAppFunction) {
 
             if (error instanceof Error.ValidationError) {
                 return res.status(400).json({error: error.message});
+            }
+
+            if (error instanceof JsonWebTokenError) {
+                res.status(401).json({error: 'Invalid token'});
             }
             next(error);
         });
