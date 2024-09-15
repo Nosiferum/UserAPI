@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  user-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: user-api
+    image: user-api:latest
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mongo
+    environment:
+      - MONGO_URI=mongodb://mongo:27018/userAPI
+      - JWT_SECRET=secret
+      - PORT=3001
+    networks:
+      - service-api-network
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo-2
+    command: mongod --port 27018
+    ports:
+      - "27018:27018"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - service-api-network
+
+volumes:
+  mongo_data:
+
+networks:
+  service-api-network:
+    driver: bridge
+
+name: user-microservice
