@@ -16,7 +16,7 @@ services:
       - JWT_SECRET=secret
       - PORT=3001
     networks:
-      - service-api-network
+      - user-api-network
 
   mongo:
     image: mongo:latest
@@ -27,13 +27,13 @@ services:
     volumes:
       - mongo_data:/data/db
     networks:
-      - service-api-network
+      - user-api-network
 
 volumes:
   mongo_data:
 
 networks:
-  service-api-network:
+  user-api-network:
     driver: bridge
 
 name: user-microservice
