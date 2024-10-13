@@ -22,7 +22,7 @@ router.post('/register', wrapAsync(async (req: Request, res: Response) => {
         id: newUser._id,
         username: newUser.username
     }, process.env.JWT_SECRET || 'secret', {expiresIn: '1h'});
-    res.status(201).json({message: `User created successfully with token: ${token}`});
+    res.status(201).json({token});
 }));
 
 
@@ -46,7 +46,7 @@ router.post('/login', wrapAsync(async (req: Request, res: Response) => {
         username: user.username
     }, process.env.JWT_SECRET || 'secret', {expiresIn: '1h'});
 
-    res.json({token});
+    res.status(200).json({token});
 }));
 
 export default router;
